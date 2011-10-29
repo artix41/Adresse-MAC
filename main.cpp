@@ -6,9 +6,7 @@ using namespace std;
 
 const int NBR_CARACTERES_ADRESSE_MAC = 17; // En comptant les tirets
 const int NBR_CARACTERES_DEBUT_ADRESSE_MAC = 8; // 3 premiers octets en comptant les tirets
-const int NBR_CARACTERES_MAX_CONSTRUCTEUR = 50;
 const int NBR_CARACTERES_AVANT_CONSTRUCTEUR = 18; // Pour la manipulation de fichier
-const int TAILLE_MAX_LIGNE = 100;
 const int TAILLE_MAX_MOT = 100;
 
 char adresseMacRecherchee[NBR_CARACTERES_ADRESSE_MAC + 1];
