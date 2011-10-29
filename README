@@ -1,2 +1,7 @@
 Projet de recherche du fabricant d'une adresse MAC donnée.
-Le programme prend en entrée une adresse MAC avec tirets et renvoie le constructeur correspondant.
+Le programme prend en entrée une adresse MAC et renvoie le constructeur correspondant.
+
+Formats de l'adresse MAC :
+- aabbccddeeff
+- aa:bb:cc:dd:ee:ff, en remplaçant ':' par n'importe quelle autre séparation qui n'est ni un nombre, ni une lettre entre A et F
+- lettres en majuscule ou en minuscule
