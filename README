@@ -1,1 +1,2 @@
-Projet de recherche du fabricant d'une adresse MAC donnée
+Projet de recherche du fabricant d'une adresse MAC donnée.
+Le programme prend en entrée une adresse MAC avec tirets et renvoie le constructeur correspondant.
