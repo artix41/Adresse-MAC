@@ -102,8 +102,8 @@ void print_constructor (char searched_address[])
 
 int main (int argc, char *argv[])
 {
-	char adresseMacRecherchee[CHAR_COUNT_MAC_ADDRESS + 1];
-	char debutAdresseMacRecherchee[CHAR_COUNT_BEGIN_MAC_ADDRESS + 1];
+	char searched_mac_address[CHAR_COUNT_MAC_ADDRESS + 1];
+	char begin_searched_mac_address[CHAR_COUNT_BEGIN_MAC_ADDRESS + 1];
 
 	if (argc != 2)
 	{
@@ -111,18 +111,18 @@ int main (int argc, char *argv[])
 		exit (1);
 	}
 
-	strcpy (adresseMacRecherchee, argv[1]);
-	adresseMacRecherchee[CHAR_COUNT_MAC_ADDRESS] = '\0';
+	strcpy (searched_mac_address, argv[1]);
+	searched_mac_address[CHAR_COUNT_MAC_ADDRESS] = '\0';
 
-	formatting_address (adresseMacRecherchee);
+	formatting_address (searched_mac_address);
 
-	if (!address_well_formatted (adresseMacRecherchee))
+	if (!address_well_formatted (searched_mac_address))
 		exit (1);
 
-	strncpy (debutAdresseMacRecherchee, adresseMacRecherchee, CHAR_COUNT_BEGIN_MAC_ADDRESS);
-	debutAdresseMacRecherchee[8] = '\0';
+	strncpy (begin_searched_mac_address, searched_mac_address, CHAR_COUNT_BEGIN_MAC_ADDRESS);
+	begin_searched_mac_address[8] = '\0';
 
-	print_constructor (debutAdresseMacRecherchee);
+	print_constructor (begin_searched_mac_address);
 
 	return 0;
 }
