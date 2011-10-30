@@ -3,49 +3,52 @@
 #include <string.h>
 #include <ctype.h>
 
-const int NBR_CARACTERES_ADRESSE_MAC = 17; // En comptant les tirets
-const int NBR_CARACTERES_DEBUT_ADRESSE_MAC = 8; // 3 premiers octets en comptant les tirets
-const int NBR_SEPARATIONS_ADRESSE_MAC = 5;
-const int NBR_CARACTERES_AVANT_CONSTRUCTEUR = 18; // Pour la manipulation de fichier
-const int TAILLE_MAX_MOT = 100;
+const int CHAR_COUNT_MAC_ADDRESS = 17; // En comptant les tirets
+const int CHAR_COUNT_BEGIN_MAC_ADDRESS = 8; // 3 premiers octets en comptant les tirets
+const int CHAR_COUNT_BEFORE_CONSTRUCTOR = 18; // Pour la manipulation de fichier
+const int MAX_SIZE_WORD = 100;
 
-void modifierFormatAdresse (char adresseDepart[])
+void formatting_address (char address_start[])
 {
-	char adresseBonFormat[NBR_CARACTERES_ADRESSE_MAC + 1];
+	/* La fonction prendre une adresse MAC en paramètre et la met dans un format aa-bb-cc-dd-ee-ff si elle est correct */
+
+	char address_formatted[CHAR_COUNT_MAC_ADDRESS + 1];
 	int iDigit = 0;
 
-	if ((adresseDepart[2] >= '0' && adresseDepart[2] <= '9') || (toupper (adresseDepart[2]) >= 'A' && toupper (adresseDepart[2]) <= 'F')) // Format aabbccddeeff
+	if ((address_start[2] >= '0' && address_start[2] <= '9') || (toupper (address_start[2]) >= 'A' && toupper (address_start[2]) <= 'F')) // Format aabbccddeeff
 	{
-		for (int iCaractere = 0; iCaractere < NBR_CARACTERES_ADRESSE_MAC; iCaractere++)
+		for (int idx_char = 0; idx_char < CHAR_COUNT_MAC_ADDRESS; idx_char++)
 		{
-			if ((iCaractere + 1) % 3 != 0)
+			if ((idx_char + 1) % 3 != 0)
 			{
-				adresseBonFormat[iCaractere] = toupper (adresseDepart[iDigit]);
+				address_formatted[idx_char] = toupper (address_start[iDigit]);
 				iDigit++;
 			}
 			else
-				adresseBonFormat[iCaractere] = '-';
+				address_formatted[idx_char] = '-';
 		}
 
-		strcpy (adresseDepart, adresseBonFormat);
-		adresseDepart[NBR_CARACTERES_ADRESSE_MAC] = '\0';
+		strcpy (address_start, address_formatted);
+		address_start[CHAR_COUNT_MAC_ADDRESS] = '\0';
 	}
 	else // Format aa:bb:cc:dd:ee:ff, en remplaçant ':' par n'importe quelle séparation
 	{
-		for (int iCaractere = 2; iCaractere < NBR_CARACTERES_ADRESSE_MAC; iCaractere += 3)
+		for (int idx_char = 2; idx_char < CHAR_COUNT_MAC_ADDRESS; idx_char += 3)
 		{
-			adresseDepart[iCaractere] = '-';
+			address_start[idx_char] = '-';
 		}
 	}
 }
 
-int bonFormatAdresse (char adresseMac[])
+int address_well_formatted (char mac_address[])
 {
-	for (int iCaractere = 0; iCaractere < NBR_CARACTERES_ADRESSE_MAC; iCaractere++)
+	/* La fonction prend une adresse MAC en paramètre et renvoie un booléen qui vaut 1 si l'adresse est bien formattée, 0 sinon */
+
+	for (int idx_char = 0; idx_char < CHAR_COUNT_MAC_ADDRESS; idx_char++)
 	{
-		if (((iCaractere + 1) % 3 != 0 
-			&& !(adresseMac[iCaractere] >= '0' && adresseMac[iCaractere] <= '9') && !(adresseMac[iCaractere] >= 'A' && adresseMac[iCaractere] <= 'F'))
-			|| ((iCaractere + 1) % 3 == 0 && adresseMac[iCaractere] != '-'))
+		if (((idx_char + 1) % 3 != 0 
+			&& !(mac_address[idx_char] >= '0' && mac_address[idx_char] <= '9') && !(mac_address[idx_char] >= 'A' && mac_address[idx_char] <= 'F'))
+			|| ((idx_char + 1) % 3 == 0 && mac_address[idx_char] != '-'))
 		{
 			printf ("L'adresse MAC entrée est incorrect (mauvais format).\n\n");
 			printf ("Format de l'adresse MAC :\n");
@@ -59,46 +62,48 @@ int bonFormatAdresse (char adresseMac[])
 	return 1;
 }
 
-void afficherConstructeur (char adresseRecherchee[])
+void print_constructor (char searched_address[])
 {
-	char adresseAct[TAILLE_MAX_MOT];
-	char caractereAct = ' ';
+	/* La fonction prend en paramètre le début d'une adresse MAC sous la forme aa-bb-cc et affiche son constructeur */
 
-	FILE* flisteAdresses;
-	flisteAdresses = fopen ("oui.txt", "r");
+	char cur_address[MAX_SIZE_WORD];
+	char cur_char = ' ';
 
-	if (flisteAdresses == NULL)
+	FILE* file_oui;
+	file_oui = fopen ("oui.txt", "r");
+
+	if (file_oui == NULL)
 	{
 		printf ("Echec à l'ouverture du fichier oui.txt !\n");
 		exit (1);
 	}
 
-	rewind (flisteAdresses);
+	rewind (file_oui);
 
 	do
 	{
-		if (fscanf (flisteAdresses, "%s", adresseAct) == EOF)
+		if (fscanf (file_oui, "%s", cur_address) == EOF)
 		{
 			printf ("Adresse MAC non trouvée !\n");
 			exit (1);
 		}
-	} while (strcmp (adresseRecherchee, adresseAct));
+	} while (strcmp (searched_address, cur_address));
 
-	fseek (flisteAdresses, NBR_CARACTERES_AVANT_CONSTRUCTEUR - NBR_CARACTERES_DEBUT_ADRESSE_MAC, SEEK_CUR);
+	fseek (file_oui, CHAR_COUNT_BEFORE_CONSTRUCTOR - CHAR_COUNT_BEGIN_MAC_ADDRESS, SEEK_CUR);
 
-	while (caractereAct != '\n')
+	while (cur_char != '\n')
 	{
-		caractereAct = fgetc (flisteAdresses);
-		printf ("%c", caractereAct);
+		cur_char = fgetc (file_oui);
+		printf ("%c", cur_char);
 	}
 
-	fclose (flisteAdresses);
+	fclose (file_oui);
 }
 
 int main (int argc, char *argv[])
 {
-	char adresseMacRecherchee[NBR_CARACTERES_ADRESSE_MAC + 1];
-	char debutAdresseMacRecherchee[NBR_CARACTERES_DEBUT_ADRESSE_MAC + 1];
+	char adresseMacRecherchee[CHAR_COUNT_MAC_ADDRESS + 1];
+	char debutAdresseMacRecherchee[CHAR_COUNT_BEGIN_MAC_ADDRESS + 1];
 
 	if (argc != 2)
 	{
@@ -107,17 +112,17 @@ int main (int argc, char *argv[])
 	}
 
 	strcpy (adresseMacRecherchee, argv[1]);
-	adresseMacRecherchee[NBR_CARACTERES_ADRESSE_MAC] = '\0';
+	adresseMacRecherchee[CHAR_COUNT_MAC_ADDRESS] = '\0';
 
-	modifierFormatAdresse (adresseMacRecherchee);
+	formatting_address (adresseMacRecherchee);
 
-	if (!bonFormatAdresse (adresseMacRecherchee))
+	if (!address_well_formatted (adresseMacRecherchee))
 		exit (1);
 
-	strncpy (debutAdresseMacRecherchee, adresseMacRecherchee, NBR_CARACTERES_DEBUT_ADRESSE_MAC);
+	strncpy (debutAdresseMacRecherchee, adresseMacRecherchee, CHAR_COUNT_BEGIN_MAC_ADDRESS);
 	debutAdresseMacRecherchee[8] = '\0';
 
-	afficherConstructeur (debutAdresseMacRecherchee);
+	print_constructor (debutAdresseMacRecherchee);
 
 	return 0;
 }
