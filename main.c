@@ -49,14 +49,7 @@ int address_well_formatted (char mac_address[])
 		if (((idx_char + 1) % 3 != 0 
 			&& !(mac_address[idx_char] >= '0' && mac_address[idx_char] <= '9') && !(mac_address[idx_char] >= 'A' && mac_address[idx_char] <= 'F'))
 			|| ((idx_char + 1) % 3 == 0 && mac_address[idx_char] != '-'))
-		{
-			printf ("L'adresse MAC entrée est incorrect (mauvais format).\n\n");
-			printf ("Format de l'adresse MAC :\n");
-			printf ("- aabbccddeeff\n");
-			printf ("- aa:bb:cc:dd:ee:ff, en remplaçant ':' par n'importe quelle séparation qui n'est ni un chiffre ni une lettre entre A et F\n");
-			printf ("- lettres en majuscule ou en minuscule");
 			return 0;
-		}
 	}
 
 	return 1;
@@ -117,7 +110,14 @@ int main (int argc, char *argv[])
 	formatting_address (searched_mac_address);
 
 	if (!address_well_formatted (searched_mac_address))
+	{
+		printf ("L'adresse MAC entrée est incorrect (mauvais format).\n\n");
+		printf ("Format de l'adresse MAC :\n");
+		printf ("- aabbccddeeff\n");
+		printf ("- aa:bb:cc:dd:ee:ff, en remplaçant ':' par n'importe quelle séparation qui n'est ni un chiffre ni une lettre entre A et F\n");
+		printf ("- lettres en majuscule ou en minuscule");
 		exit (1);
+	}
 
 	strncpy (begin_searched_mac_address, searched_mac_address, CHAR_COUNT_BEGIN_MAC_ADDRESS);
 	begin_searched_mac_address[8] = '\0';
