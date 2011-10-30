@@ -1,14 +1,14 @@
-# Adresses MAC : constructeur
+# MAC_ADDRESS : manufacturer
 
 CC = gcc
 CFLAGS = -std=c99 -c -Wall
 
-all: constructeurMAC
+all: main.o usage.o mac_address_manufacturer.o
+	$(CC) $^ -o manufacturer -lm
 
-constructeurMAC: main.o
-	$(CC) main.o -o ConstructeurMAC -lm
-
-main.o: main.c
-	$(CC) $(CFLAGS) main.c
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 clean:
 	rm -rf *.o
+update:
+	wget -N http://standards.ieee.org/develop/regauth/oui/oui.txt
