@@ -39,6 +39,26 @@ void modifierFormatAdresse (char adresseDepart[])
 	}
 }
 
+int bonFormatAdresse (char adresseMac[])
+{
+	for (int iCaractere = 0; iCaractere < NBR_CARACTERES_ADRESSE_MAC; iCaractere++)
+	{
+		if (((iCaractere + 1) % 3 != 0 
+			&& !(adresseMac[iCaractere] >= '0' && adresseMac[iCaractere] <= '9') && !(adresseMac[iCaractere] >= 'A' && adresseMac[iCaractere] <= 'F'))
+			|| ((iCaractere + 1) % 3 == 0 && adresseMac[iCaractere] != '-'))
+		{
+			printf ("L'adresse MAC entrée est incorrect (mauvais format).\n\n");
+			printf ("Format de l'adresse MAC :\n");
+			printf ("- aabbccddeeff\n");
+			printf ("- aa:bb:cc:dd:ee:ff, en remplaçant ':' par n'importe quelle séparation qui n'est ni un chiffre ni une lettre entre A et F\n");
+			printf ("- lettres en majuscule ou en minuscule");
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
 void afficherConstructeur (char adresseRecherchee[])
 {
 	char adresseAct[TAILLE_MAX_MOT];
@@ -90,6 +110,9 @@ int main (int argc, char *argv[])
 	adresseMacRecherchee[NBR_CARACTERES_ADRESSE_MAC] = '\0';
 
 	modifierFormatAdresse (adresseMacRecherchee);
+
+	if (!bonFormatAdresse (adresseMacRecherchee))
+		exit (1);
 
 	strncpy (debutAdresseMacRecherchee, adresseMacRecherchee, NBR_CARACTERES_DEBUT_ADRESSE_MAC);
 	debutAdresseMacRecherchee[8] = '\0';
