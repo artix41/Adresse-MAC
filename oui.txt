@@ -83598,6 +83598,13 @@ company_id			Organization
 				Seattle WA 98109
 				UNITED STATES
 
+24-5F-DF   (hex)		KYOCERA Corporation
+245FDF     (base 16)		KYOCERA Corporation
+				2-1-1,Kagahara,
+				Tsuzuki-ku
+				Yokohama-shi Kanagawa 224-8502
+				JAPAN
+
 24-77-03   (hex)		Intel Corporate
 247703     (base 16)		Intel Corporate
 				Lot 8, Jalan Hi-Tech 2/3
@@ -87896,6 +87903,12 @@ company_id			Organization
 				Scottsdale Arizona 85260
 				UNITED STATES
 
+64-55-63   (hex)		Intelight Inc.
+645563     (base 16)		Intelight Inc.
+				3450 S Broadmont Drive, Suite 126
+				Tucson AZ 85713
+				UNITED STATES
+
 64-55-7F   (hex)		NSFOCUS Information Technology Co., Ltd.
 64557F     (base 16)		NSFOCUS Information Technology Co., Ltd.
 				3/F,Ether Building, No.4 Beiwa Rd.,Haidian District
@@ -92145,6 +92158,12 @@ company_id			Organization
 				Wateringen Zuid Holland 2292JC
 				NETHERLANDS
 
+9C-B7-0D   (hex)		Liteon Technology Corporation
+9CB70D     (base 16)		Liteon Technology Corporation
+				4F,90,Chien 1 Road, ChungHo. 
+				Taipei Hsien   23585
+				TAIWAN, REPUBLIC OF CHINA
+
 9C-C0-77   (hex)		PrintCounts, LLC
 9CC077     (base 16)		PrintCounts, LLC
 				5109 W Lemon St
@@ -94610,7 +94629,7 @@ C09C92     (base 16)		COBY
 C0-A0-DE   (hex)		Multi Touch Oy
 C0A0DE     (base 16)		Multi Touch Oy
 				Henry Fordin katu 6
-				Helsinki  00100
+				Helsinki  00150
 				FINLAND
 
 C0-A2-6D   (hex)		Abbott Point of Care
@@ -96874,6 +96893,12 @@ E039D7     (base 16)		Plexxi, Inc.
 				Suite 3322
 				Nashua NH 03062
 				UNITED STATES
+
+E0-3C-5B   (hex)		SHENZHEN JIAXINJIE ELECTRON CO.,LTD
+E03C5B     (base 16)		SHENZHEN JIAXINJIE ELECTRON CO.,LTD
+				Shenzhen Jiaxinjie Security Industrial park,No 6 Xin He Xin xing Industrial Park, Fuyong Town,Bao'an District 
+				SHENZHEN GUANGDONG 518103
+				CHINA
 
 E0-3E-7D   (hex)		data-complex GmbH
 E03E7D     (base 16)		data-complex GmbH

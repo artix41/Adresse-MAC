@@ -12,7 +12,7 @@
 
 void formatting_address (char address_start[])
 {
-        /* La fonction prend une adresse MAC en paramètre et la met dans un format aa-bb-cc-dd-ee-ff si elle est correct */
+        /* This function takes a MAC address in input and converts it in the format aa-bb-cc-dd-ee-ff */
 
         char address_formatted[CHAR_COUNT_MAC_ADDRESS + 1];
         int idx_digit = 0;
@@ -44,7 +44,7 @@ void formatting_address (char address_start[])
 
 int address_well_formatted (char mac_address[])
 {
-        /* La fonction prend une adresse MAC en paramètre et renvoie un booléen qui vaut 1 si l'adresse est bien formattée, 0 sinon */
+        /* This function takes a MAC address in input and returns a booleen value : 1 if the address is well formatted, 0 else */
 
         for (int idx_char = 0; idx_char < CHAR_COUNT_MAC_ADDRESS; idx_char++)
         {
@@ -59,7 +59,7 @@ int address_well_formatted (char mac_address[])
 
 void print_manufacturer (char searched_address[])
 {
-        /* La fonction prend en paramètre le début d'une adresse MAC sous la forme aa-bb-cc et affiche son constructeur */
+        /* This function takes the begin of a MAC address (aa-bb-cc) in input and prints its manufacturer */
 
         char cur_address[MAX_SIZE_WORD];
         char cur_char = ' ';
